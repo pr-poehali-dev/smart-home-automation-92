@@ -5,8 +5,7 @@ import { ManifestoSection } from "@/components/sections/manifesto-section"
 import { FeaturesSection } from "@/components/sections/features-section"
 import { DresscodeSection } from "@/components/sections/dresscode-section"
 import { ShowcaseSection } from "@/components/sections/showcase-section"
-import { CarouselSection } from "@/components/sections/carousel-section"
-import { InsightsSection } from "@/components/sections/insights-section"
+import { LocationSection } from "@/components/sections/location-section"
 import { PricingSection } from "@/components/sections/pricing-section"
 import { FooterSection } from "@/components/sections/footer-section"
 
@@ -20,8 +19,7 @@ const Index = () => {
         <FeaturesSection />
         <DresscodeSection />
         <ShowcaseSection />
-        <CarouselSection />
-        <InsightsSection />
+        <LocationSection />
         <PricingSection />
         <FooterSection />
       </main>
