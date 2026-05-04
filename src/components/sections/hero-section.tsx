@@ -166,32 +166,6 @@ export function HeroSection() {
           посвящённый дню рождения нашей семьи
         </p>
 
-        <div className="flex items-center gap-4">
-          <div className="h-px w-12 bg-foreground/20" />
-          <p
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: "italic",
-              fontSize: "clamp(13px, 3vw, 17px)",
-              color: "hsl(40 20% 52%)",
-              letterSpacing: "0.05em",
-            }}
-          >
-            Мы вас очень ждём
-          </p>
-          <div className="h-px w-12 bg-foreground/20" />
-        </div>
-
-        <p
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(13px, 3vw, 16px)",
-            color: "hsl(40 18% 52%)",
-            letterSpacing: "0.03em",
-          }}
-        >
-          Просим дать точный ответ до 31 мая
-        </p>
       </motion.div>
 
       {/* Scroll indicator */}
