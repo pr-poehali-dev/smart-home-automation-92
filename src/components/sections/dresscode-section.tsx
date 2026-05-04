@@ -96,7 +96,7 @@ export function DresscodeSection() {
           >
             Мы хотим, чтобы вы чувствовали себя максимально комфортно на нашем торжестве и оделись как душе угодно,
             но если всё же есть желание подчеркнуть нотку цветовой гаммы —
-            свадьба пройдёт в цвете <span style={{ fontFamily: "'Great Vibes', cursive", fontSize: "1.5em", color: "hsl(38 40% 88%)", fontStyle: "normal", lineHeight: 1 }}>шоколадно-шампань</span>
+            свадьба пройдёт в цвете <span style={{ fontFamily: "'Great Vibes', cursive", fontSize: "1.5em", color: "hsl(38 40% 88%)", fontStyle: "normal", lineHeight: 1 }}>Шоколад & Шампань</span>
           </p>
 
           <span
