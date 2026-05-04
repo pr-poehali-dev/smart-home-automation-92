@@ -41,18 +41,27 @@ export function DresscodeSection() {
           viewport={{ once: true }}
         >
           <p
-            className="text-sm uppercase tracking-[0.4em] mb-4"
-            style={{ color: "hsl(35 25% 52%)", fontFamily: "'Cormorant Garamond', serif" }}
+            className="text-xs uppercase tracking-[0.55em] mb-5"
+            style={{
+              color: "hsl(38 40% 62%)",
+              fontFamily: "'Cormorant Garamond', serif",
+              letterSpacing: "0.55em",
+            }}
           >
             Дресс-код
           </p>
           <h2
-            className="text-4xl md:text-5xl mb-6"
-            style={{ fontFamily: "'Great Vibes', cursive", color: "hsl(38 38% 78%)" }}
+            className="leading-none"
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontSize: "clamp(52px, 14vw, 96px)",
+              color: "hsl(40 38% 88%)",
+              textShadow: "0 2px 24px hsl(38 40% 60% / 0.18)",
+            }}
           >
             Шоколад & Шампань
           </h2>
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-3 mt-6">
             <div className="h-px w-20" style={{ background: "hsl(32 20% 32%)" }} />
             <span style={{ color: "hsl(35 25% 45%)", fontSize: "10px" }}>✦</span>
             <div className="h-px w-20" style={{ background: "hsl(32 20% 32%)" }} />
