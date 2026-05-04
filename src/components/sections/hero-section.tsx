@@ -30,7 +30,7 @@ export function HeroSection() {
       >
         <div
           className="relative w-[300px] h-[300px] md:w-[440px] md:h-[440px] rounded-full flex flex-col items-center justify-center"
-          style={{ background: "hsl(40 28% 90%)" }}
+          style={{ background: "hsl(44 55% 88%)" }}
         >
           {/* Border rings */}
           <div className="absolute inset-3 rounded-full border" style={{ borderColor: "hsl(30 20% 40%)", opacity: 0.5 }} />
