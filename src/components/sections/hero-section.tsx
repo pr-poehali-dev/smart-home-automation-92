@@ -146,19 +146,34 @@ export function HeroSection() {
 
       {/* Text below circle */}
       <motion.div
-        className="mt-10 text-center flex flex-col items-center gap-3"
+        className="mt-10 text-center flex flex-col items-center gap-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.9 }}
       >
+        <p
+          className="max-w-xs md:max-w-md leading-relaxed"
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: "italic",
+            fontSize: "clamp(16px, 3.8vw, 22px)",
+            color: "hsl(40 28% 74%)",
+            letterSpacing: "0.03em",
+            lineHeight: 1.7,
+          }}
+        >
+          Приглашаем вас разделить с нами чудесный праздник,
+          посвящённый дню рождения нашей семьи
+        </p>
+
         <div className="flex items-center gap-4">
           <div className="h-px w-12 bg-foreground/20" />
           <p
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: "italic",
-              fontSize: "clamp(15px, 3.5vw, 20px)",
-              color: "hsl(40 25% 72%)",
+              fontSize: "clamp(13px, 3vw, 17px)",
+              color: "hsl(40 20% 52%)",
               letterSpacing: "0.05em",
             }}
           >
