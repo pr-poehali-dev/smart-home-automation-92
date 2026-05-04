@@ -1,23 +1,28 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
 
-const rsvpOptions = [
-  {
-    name: "Приду!",
-    description: "С радостью разделю ваш праздник",
-    features: ["Приду на церемонию", "Приду на банкет", "Танцую до утра", "Везу подарок с душой"],
-    emoji: "🥂",
-    popular: true,
-  },
-  {
-    name: "К сожалению, нет",
-    description: "Буду с вами мысленно",
-    features: ["Присылаю поздравления", "Желаю счастья и любви", "Жду следующей встречи", "Обниму при первой возможности"],
-    emoji: "💌",
-    popular: false,
-  },
-]
+const RSVP_URL = "https://functions.poehali.dev/d84c0119-3836-4865-b498-40569b3b3559"
 
 export function PricingSection() {
+  const [name, setName] = useState("")
+  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle")
+  const [chosen, setChosen] = useState<"yes" | "no" | null>(null)
+
+  async function submit(answer: "yes" | "no") {
+    if (!name.trim()) {
+      setChosen(answer)
+      return
+    }
+    setStatus("loading")
+    setChosen(answer)
+    await fetch(RSVP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name.trim(), answer }),
+    })
+    setStatus("done")
+  }
+
   return (
     <section className="px-6 py-24 relative" style={{ background: "hsl(50 8% 9%)" }}>
       <div
@@ -28,9 +33,9 @@ export function PricingSection() {
         }}
       />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-md mx-auto relative z-10">
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,15 +48,12 @@ export function PricingSection() {
           </p>
           <h2
             className="text-4xl md:text-5xl"
-            style={{
-              fontFamily: "'Great Vibes', cursive",
-              color: "hsl(40 25% 78%)",
-            }}
+            style={{ fontFamily: "'Great Vibes', cursive", color: "hsl(40 25% 78%)" }}
           >
             Вы придёте?
           </h2>
           <p
-            className="mt-3 max-w-sm mx-auto"
+            className="mt-3"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: "italic",
@@ -68,91 +70,98 @@ export function PricingSection() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          {rsvpOptions.map((option, i) => (
-            <motion.div
-              key={i}
-              className="relative rounded-2xl p-8 border"
-              style={{
-                background: option.popular ? "hsl(50 8% 13%)" : "hsl(50 8% 11%)",
-                borderColor: option.popular ? "hsl(40 25% 40%)" : "hsl(40 15% 22%)",
-                boxShadow: option.popular ? "0 0 30px hsl(40 25% 35% / 0.15)" : "none",
-              }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 0.98 }}
+        {status === "done" ? (
+          <motion.div
+            className="text-center py-12"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <p
+              className="text-5xl mb-6"
+              style={{ fontFamily: "'Great Vibes', cursive", color: "hsl(38 38% 78%)" }}
             >
-              {option.popular && (
-                <span
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-4 py-1 rounded-full"
-                  style={{
-                    background: "hsl(38 40% 65%)",
-                    color: "hsl(50 8% 10%)",
-                    fontFamily: "'Cormorant Garamond', serif",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  Будем рады!
-                </span>
-              )}
-
-              <div className="text-center pb-6 border-b" style={{ borderColor: "hsl(40 15% 22%)" }}>
-                <span className="text-4xl">{option.emoji}</span>
-                <h3
-                  className="mt-3 text-2xl"
-                  style={{ fontFamily: "'Great Vibes', cursive", color: "hsl(40 22% 78%)" }}
-                >
-                  {option.name}
-                </h3>
+              {chosen === "yes" ? "Ждём вас!" : "Будем скучать!"}
+            </p>
+            <p
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontStyle: "italic",
+                color: "hsl(40 15% 50%)",
+                fontSize: "17px",
+              }}
+            >
+              {chosen === "yes"
+                ? "Спасибо, что подтвердили! До встречи на торжестве 💛"
+                : "Жаль, что не сможете — мы вас любим 💌"}
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            className="flex flex-col gap-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            {/* Name input */}
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Ваше имя"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="w-full py-4 px-5 rounded-2xl outline-none transition-all"
+                style={{
+                  background: "hsl(50 8% 13%)",
+                  border: `1px solid ${name.trim() ? "hsl(38 35% 45%)" : "hsl(40 15% 22%)"}`,
+                  color: "hsl(40 22% 80%)",
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "18px",
+                }}
+              />
+              {!name.trim() && chosen !== null && (
                 <p
-                  className="mt-1 text-sm"
-                  style={{ color: "hsl(40 12% 48%)", fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}
+                  className="absolute -bottom-5 left-1 text-xs"
+                  style={{ color: "hsl(0 55% 55%)", fontFamily: "'Cormorant Garamond', serif" }}
                 >
-                  {option.description}
+                  Пожалуйста, введите имя
                 </p>
-              </div>
+              )}
+            </div>
 
-              <ul className="mt-6 space-y-3">
-                {option.features.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-3">
-                    <span style={{ color: "hsl(38 35% 62%)", fontSize: "12px" }}>✦</span>
-                    <span
-                      className="text-sm"
-                      style={{ color: "hsl(40 18% 65%)", fontFamily: "'Cormorant Garamond', serif" }}
-                    >
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
+            {/* Buttons */}
+            <div className="flex flex-col gap-3 mt-2">
               <button
-                className="w-full mt-8 py-3 px-6 rounded-xl font-medium transition-all"
-                style={
-                  option.popular
-                    ? {
-                        background: "hsl(38 40% 65%)",
-                        color: "hsl(50 8% 10%)",
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "16px",
-                        letterSpacing: "0.05em",
-                      }
-                    : {
-                        background: "transparent",
-                        color: "hsl(40 18% 58%)",
-                        border: "1px solid hsl(40 15% 28%)",
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "16px",
-                      }
-                }
+                onClick={() => submit("yes")}
+                disabled={status === "loading"}
+                className="w-full py-4 px-6 rounded-2xl font-medium transition-all hover:opacity-90 active:scale-[0.98]"
+                style={{
+                  background: "hsl(38 40% 65%)",
+                  color: "hsl(50 8% 10%)",
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "18px",
+                  letterSpacing: "0.05em",
+                }}
               >
-                {option.popular ? "Подтвердить участие" : "Сообщить об отсутствии"}
+                Приду! 🥂
               </button>
-            </motion.div>
-          ))}
-        </div>
+              <button
+                onClick={() => submit("no")}
+                disabled={status === "loading"}
+                className="w-full py-4 px-6 rounded-2xl transition-all hover:opacity-80 active:scale-[0.98]"
+                style={{
+                  background: "transparent",
+                  color: "hsl(40 18% 58%)",
+                  border: "1px solid hsl(40 15% 28%)",
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "18px",
+                }}
+              >
+                К сожалению, не смогу
+              </button>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   )

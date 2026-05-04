@@ -77,29 +77,18 @@ export function ShowcaseSection() {
           <div className="relative z-10 p-8 md:p-12 flex flex-col gap-10">
             {sections.map((s, i) => (
               <div key={i}>
-                <div className="flex items-start gap-5">
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center text-2xl flex-shrink-0 mt-1"
-                    style={{
-                      background: `${accent}18`,
-                      border: `1px solid ${accent}35`,
-                    }}
-                  >
-                    {s.icon}
-                  </div>
-                  <p
-                    className="leading-relaxed"
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontStyle: "italic",
-                      fontSize: "clamp(16px, 3vw, 19px)",
-                      color: "hsl(38 25% 72%)",
-                      lineHeight: 1.8,
-                    }}
-                  >
-                    {s.text}
-                  </p>
-                </div>
+                <p
+                  className="leading-relaxed"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontStyle: "italic",
+                    fontSize: "clamp(16px, 3vw, 19px)",
+                    color: "hsl(38 25% 72%)",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  {s.text}
+                </p>
                 {i < sections.length - 1 && (
                   <div className="h-px mt-8" style={{ background: `${accent}20` }} />
                 )}

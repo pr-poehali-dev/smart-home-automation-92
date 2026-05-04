@@ -1,0 +1,13 @@
+{
+  "tests": [
+    {
+      "name": "POST yes response",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Тест Тестов", "answer": "yes"},
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "contains"
+    }
+  ]
+}
