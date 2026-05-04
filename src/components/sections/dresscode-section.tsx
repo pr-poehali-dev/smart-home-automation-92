@@ -41,12 +41,8 @@ export function DresscodeSection() {
           viewport={{ once: true }}
         >
           <p
-            className="text-xs uppercase tracking-[0.55em] mb-5"
-            style={{
-              color: "hsl(38 40% 62%)",
-              fontFamily: "'Cormorant Garamond', serif",
-              letterSpacing: "0.55em",
-            }}
+            className="text-sm uppercase tracking-[0.4em] mb-4"
+            style={{ color: "hsl(35 25% 52%)", fontFamily: "'Cormorant Garamond', serif" }}
           >
             Дресс-код
           </p>
@@ -100,7 +96,7 @@ export function DresscodeSection() {
           >
             Мы хотим, чтобы вы чувствовали себя максимально комфортно на нашем торжестве и оделись как душе угодно,
             но если всё же есть желание подчеркнуть нотку цветовой гаммы —
-            свадьба пройдёт в цвете <span style={{ color: "hsl(38 40% 82%)", fontStyle: "normal" }}>шоколадно-шампань</span>
+            свадьба пройдёт в цвете <span style={{ fontFamily: "'Great Vibes', cursive", fontSize: "1.5em", color: "hsl(38 40% 88%)", fontStyle: "normal", lineHeight: 1 }}>шоколадно-шампань</span>
           </p>
 
           <span
