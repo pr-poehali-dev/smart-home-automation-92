@@ -1,10 +1,18 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
+const weddingImage = "https://cdn.poehali.dev/projects/9c2010c8-b1d5-46ef-95a0-55b967bebd39/files/e53b9f69-bf98-4c11-b0cb-cee2788c2b44.jpg"
+
 const showcaseImages = [
-  "/modern-architecture-building-exterior-minimal.jpg",
-  "/fashion-model-editorial-portrait-dramatic-lighting.jpg",
-  "/interior-design-minimalist-living-room-natural-lig.jpg",
+  weddingImage,
+  weddingImage,
+  weddingImage,
+]
+
+const showcaseCaptions = [
+  "Начало новой главы",
+  "Любовь без условий",
+  "Вместе навсегда",
 ]
 
 export function ShowcaseSection() {
@@ -29,14 +37,14 @@ export function ShowcaseSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Галерея
+          Наша история
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {showcaseImages.map((src, i) => (
             <motion.div
               key={i}
-              className="relative h-[400px] md:h-[500px] rounded-xl overflow-hidden group"
+              className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden group"
               style={{ y: yValues[i] }}
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               whileInView={{ clipPath: "inset(0 0 0 0)" }}
@@ -46,15 +54,21 @@ export function ShowcaseSection() {
                 delay: i * 0.15,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              data-clickable
             >
               <motion.img
                 src={src}
-                alt={`Изображение ${i + 1}`}
+                alt={showcaseCaptions[i]}
                 className="w-full h-full object-cover"
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
+              <p
+                className="absolute bottom-5 left-5 text-white text-lg"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}
+              >
+                {showcaseCaptions[i]}
+              </p>
             </motion.div>
           ))}
         </div>
