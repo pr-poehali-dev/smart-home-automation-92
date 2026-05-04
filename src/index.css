@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,32 +6,32 @@
 
 @layer base {
   :root {
-    /* Wedding Rose & Gold Theme */
-    --background: 340 30% 99%;
-    --foreground: 340 40% 12%;
-    --surface: 340 20% 96%;
-    --ink: 340 40% 12%;
-    --iris: 340 55% 45%;
-    --lilac: 340 80% 88%;
-    --lime: 38 90% 75%;
-    --muted-foreground: 340 12% 48%;
+    /* Wedding Dark & Cream Theme */
+    --background: 50 8% 10%;
+    --foreground: 40 25% 88%;
+    --surface: 50 8% 14%;
+    --ink: 40 25% 88%;
+    --iris: 38 40% 65%;
+    --lilac: 40 30% 75%;
+    --lime: 38 40% 65%;
+    --muted-foreground: 40 15% 55%;
 
-    --card: 340 20% 96%;
-    --card-foreground: 340 40% 12%;
-    --popover: 340 30% 99%;
-    --popover-foreground: 340 40% 12%;
-    --primary: 340 55% 45%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 340 20% 96%;
-    --secondary-foreground: 340 40% 12%;
-    --muted: 340 20% 96%;
-    --accent: 340 80% 90%;
-    --accent-foreground: 340 40% 12%;
+    --card: 50 8% 14%;
+    --card-foreground: 40 25% 88%;
+    --popover: 50 8% 14%;
+    --popover-foreground: 40 25% 88%;
+    --primary: 38 40% 65%;
+    --primary-foreground: 50 8% 10%;
+    --secondary: 50 8% 14%;
+    --secondary-foreground: 40 25% 88%;
+    --muted: 50 8% 14%;
+    --accent: 40 30% 22%;
+    --accent-foreground: 40 25% 88%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 340 20% 90%;
-    --input: 340 20% 90%;
-    --ring: 340 55% 45%;
+    --border: 40 15% 22%;
+    --input: 40 15% 22%;
+    --ring: 38 40% 65%;
 
     --radius: 0.75rem;
 

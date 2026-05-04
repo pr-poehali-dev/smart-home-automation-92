@@ -13,12 +13,16 @@ export function ManifestoSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[80vh] flex items-center justify-center bg-background px-6 py-32"
+      className="relative min-h-[70vh] flex items-center justify-center bg-background px-6 py-28"
     >
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-4xl mx-auto relative">
         <h2
-          className="text-4xl md:text-6xl lg:text-7xl leading-tight text-center text-foreground/10"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}
+          className="text-4xl md:text-6xl lg:text-7xl leading-tight text-center"
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: "italic",
+            color: "hsl(40 15% 22%)",
+          }}
         >
           Два сердца.
           <br />
@@ -26,8 +30,16 @@ export function ManifestoSection() {
         </h2>
 
         <motion.h2
-          className="absolute inset-0 text-4xl md:text-6xl lg:text-7xl leading-tight text-center bg-gradient-to-r from-rose-400 via-pink-400 to-rose-500 bg-clip-text text-transparent"
-          style={{ clipPath, fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}
+          className="absolute inset-0 text-4xl md:text-6xl lg:text-7xl leading-tight text-center"
+          style={{
+            clipPath,
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: "italic",
+            background: "linear-gradient(135deg, hsl(38 35% 72%), hsl(40 25% 85%), hsl(38 35% 65%))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
         >
           Два сердца.
           <br />
