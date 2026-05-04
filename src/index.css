@@ -6,32 +6,32 @@
 
 @layer base {
   :root {
-    /* Wedding Dark & Cream Theme */
-    --background: 50 8% 10%;
-    --foreground: 40 25% 88%;
-    --surface: 50 8% 14%;
-    --ink: 40 25% 88%;
-    --iris: 38 40% 65%;
-    --lilac: 40 30% 75%;
-    --lime: 38 40% 65%;
-    --muted-foreground: 40 15% 55%;
+    /* Wedding Chocolate & Champagne Theme */
+    --background: 25 18% 12%;
+    --foreground: 38 35% 85%;
+    --surface: 25 15% 16%;
+    --ink: 38 35% 85%;
+    --iris: 35 45% 68%;
+    --lilac: 38 38% 78%;
+    --lime: 35 45% 68%;
+    --muted-foreground: 35 18% 52%;
 
-    --card: 50 8% 14%;
-    --card-foreground: 40 25% 88%;
-    --popover: 50 8% 14%;
-    --popover-foreground: 40 25% 88%;
-    --primary: 38 40% 65%;
-    --primary-foreground: 50 8% 10%;
-    --secondary: 50 8% 14%;
-    --secondary-foreground: 40 25% 88%;
-    --muted: 50 8% 14%;
-    --accent: 40 30% 22%;
-    --accent-foreground: 40 25% 88%;
+    --card: 25 15% 16%;
+    --card-foreground: 38 35% 85%;
+    --popover: 25 15% 16%;
+    --popover-foreground: 38 35% 85%;
+    --primary: 35 45% 68%;
+    --primary-foreground: 25 18% 12%;
+    --secondary: 25 15% 16%;
+    --secondary-foreground: 38 35% 85%;
+    --muted: 25 15% 16%;
+    --accent: 30 22% 24%;
+    --accent-foreground: 38 35% 85%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 40 15% 22%;
-    --input: 40 15% 22%;
-    --ring: 38 40% 65%;
+    --border: 30 18% 24%;
+    --input: 30 18% 24%;
+    --ring: 35 45% 68%;
 
     --radius: 0.75rem;
 
