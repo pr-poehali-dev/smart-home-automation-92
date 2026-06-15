@@ -1,10 +1,27 @@
 import json
 import os
+import urllib.request
 import psycopg2
 
 
+TELEGRAM_CHAT_ID = "1307887224"
+
+
+def send_telegram(message: str):
+    token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    if not token:
+        return
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    data = json.dumps({'chat_id': TELEGRAM_CHAT_ID, 'text': message, 'parse_mode': 'HTML'}).encode()
+    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except Exception:
+        pass
+
+
 def handler(event: dict, context) -> dict:
-    """RSVP: сохранение и получение ответов гостей"""
+    """RSVP: сохранение и получение ответов гостей, уведомление в Telegram"""
 
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -27,24 +44,35 @@ def handler(event: dict, context) -> dict:
         answer = body.get('answer')
 
         if not name or answer not in ('yes', 'no'):
+            cur.close()
+            conn.close()
             return {
                 'statusCode': 400,
                 'headers': {'Access-Control-Allow-Origin': '*'},
                 'body': json.dumps({'error': 'Укажите имя и ответ'})
             }
 
-        cur.execute(
-            "INSERT INTO rsvp_responses (name, answer) VALUES (%s, %s)",
-            (name, answer)
-        )
-        conn.commit()
+        try:
+            cur.execute(
+                "INSERT INTO rsvp_responses (name, answer) VALUES (%s, %s)",
+                (name, answer)
+            )
+            conn.commit()
+            db_ok = True
+        except Exception:
+            db_ok = False
+
         cur.close()
         conn.close()
+
+        emoji = "🥂" if answer == "yes" else "💌"
+        answer_text = "придёт" if answer == "yes" else "не сможет прийти"
+        send_telegram(f"{emoji} <b>{name}</b> {answer_text}")
 
         return {
             'statusCode': 200,
             'headers': {'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'ok': True})
+            'body': json.dumps({'ok': True, 'db_saved': db_ok})
         }
 
     if event.get('httpMethod') == 'GET':
