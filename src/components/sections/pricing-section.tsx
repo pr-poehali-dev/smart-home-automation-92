@@ -5,22 +5,32 @@ const RSVP_URL = "https://functions.poehali.dev/d84c0119-3836-4865-b498-40569b3b
 
 export function PricingSection() {
   const [name, setName] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle")
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle")
   const [chosen, setChosen] = useState<"yes" | "no" | null>(null)
+  const [nameError, setNameError] = useState(false)
 
   async function submit(answer: "yes" | "no") {
     if (!name.trim()) {
-      setChosen(answer)
+      setNameError(true)
       return
     }
+    setNameError(false)
     setStatus("loading")
     setChosen(answer)
-    await fetch(RSVP_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name.trim(), answer }),
-    })
-    setStatus("done")
+    try {
+      const res = await fetch(RSVP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name.trim(), answer }),
+      })
+      if (res.ok) {
+        setStatus("done")
+      } else {
+        setStatus("error")
+      }
+    } catch {
+      setStatus("error")
+    }
   }
 
   return (
@@ -103,38 +113,45 @@ export function PricingSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            {/* Name input */}
-            <div className="relative">
+            <div className="flex flex-col gap-1">
               <input
                 type="text"
                 placeholder="Ваше имя"
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={e => { setName(e.target.value); setNameError(false) }}
                 className="w-full py-4 px-5 rounded-2xl outline-none transition-all"
                 style={{
                   background: "hsl(50 8% 13%)",
-                  border: `1px solid ${name.trim() ? "hsl(38 35% 45%)" : "hsl(40 15% 22%)"}`,
+                  border: `1px solid ${nameError ? "hsl(0 55% 45%)" : name.trim() ? "hsl(38 35% 45%)" : "hsl(40 15% 22%)"}`,
                   color: "hsl(40 22% 80%)",
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "18px",
                 }}
               />
-              {!name.trim() && chosen !== null && (
+              {nameError && (
                 <p
-                  className="absolute -bottom-5 left-1 text-xs"
+                  className="text-sm pl-1"
                   style={{ color: "hsl(0 55% 55%)", fontFamily: "'Cormorant Garamond', serif" }}
                 >
-                  Пожалуйста, введите имя
+                  Пожалуйста, введите своё имя
                 </p>
               )}
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-col gap-3 mt-2">
+            {status === "error" && (
+              <p
+                className="text-sm text-center"
+                style={{ color: "hsl(0 55% 55%)", fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                Что-то пошло не так, попробуйте ещё раз
+              </p>
+            )}
+
+            <div className="flex flex-col gap-3">
               <button
                 onClick={() => submit("yes")}
                 disabled={status === "loading"}
-                className="w-full py-4 px-6 rounded-2xl font-medium transition-all hover:opacity-90 active:scale-[0.98]"
+                className="w-full py-4 px-6 rounded-2xl font-medium transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50"
                 style={{
                   background: "hsl(38 40% 65%)",
                   color: "hsl(50 8% 10%)",
@@ -143,12 +160,12 @@ export function PricingSection() {
                   letterSpacing: "0.05em",
                 }}
               >
-                Приду! 🥂
+                {status === "loading" && chosen === "yes" ? "Отправляю..." : "Приду! 🥂"}
               </button>
               <button
                 onClick={() => submit("no")}
                 disabled={status === "loading"}
-                className="w-full py-4 px-6 rounded-2xl transition-all hover:opacity-80 active:scale-[0.98]"
+                className="w-full py-4 px-6 rounded-2xl transition-all hover:opacity-80 active:scale-[0.98] disabled:opacity-50"
                 style={{
                   background: "transparent",
                   color: "hsl(40 18% 58%)",
@@ -157,7 +174,7 @@ export function PricingSection() {
                   fontSize: "18px",
                 }}
               >
-                К сожалению, не смогу
+                {status === "loading" && chosen === "no" ? "Отправляю..." : "К сожалению, не смогу"}
               </button>
             </div>
           </motion.div>
